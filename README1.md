@@ -285,5 +285,3 @@ This guide covers how to interact with the API for user registration, login, fil
 
 Feel free to modify or extend the APIs based on your project’s needs! Let me know if you need any further clarification or modifications!
 ```
-
-This **README.md** provides all the necessary details about the setup, API usage, and instructions to test the platform with Postman. Make sure to replace `your-username` with your actual GitHub username and adapt the MongoDB URI and JWT secret in your `.env` file.
