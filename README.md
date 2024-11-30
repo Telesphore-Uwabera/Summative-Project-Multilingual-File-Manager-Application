@@ -36,7 +36,7 @@ A platform enabling teachers to manage class materials and assignments while all
 
 #### 3. **Multilingual Support**
    - **Language Options**:
-     - Provide at least 3 supported languages (e.g., English, Spanish, French).
+     - Provide at least 3 supported languages (e.g., English, Kinyarwanda, French).
      - Use `i18next` for dynamic language switching.
    - **Localized Interface**:
      - Ensure all text strings (e.g., labels, error messages) are localized.
