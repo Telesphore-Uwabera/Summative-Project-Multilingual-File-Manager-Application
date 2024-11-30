@@ -26,8 +26,8 @@ The **Educational File Manager** platform enables teachers to manage class mater
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/your-username/educational-file-manager.git
-   cd educational-file-manager
+   git clone https://github.com/your-username/Summative-Project-Multilingual-File-Manager-Application.git
+   cd Summative-Project-Multilingual-File-Manager-Application
    ```
 
 2. **Install Dependencies**:
