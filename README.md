@@ -32,7 +32,6 @@ A platform enabling teachers to manage class materials and assignments while all
      - View only materials for their enrolled classes.
    - **Storage**:
      - Use MongoDB to store metadata (e.g., filenames, upload timestamps).
-     - Save files locally or on a cloud service like AWS S3.
 
 #### 3. **Multilingual Support**
    - **Language Options**:
@@ -99,21 +98,3 @@ A platform enabling teachers to manage class materials and assignments while all
 
 ---
 
-### **Next Steps**
-1. **Finalize the Tech Stack**:
-   - Use `Express.js` for backend.
-   - MongoDB for database.
-   - Redis and Bull for queuing.
-   - `i18next` for internationalization.
-
-2. **Set Up Development Milestones**:
-   - Week 1: Build user authentication and basic file upload.
-   - Week 2: Implement directory and class management.
-   - Week 3: Add Redis queuing and i18n support.
-   - Week 4: Testing, documentation, and final touches.
-
-3. **Documentation and Presentation**:
-   - Write clear documentation for setting up and using the application.
-   - Create a polished demo video showcasing workflows for teachers and students.
-
----
