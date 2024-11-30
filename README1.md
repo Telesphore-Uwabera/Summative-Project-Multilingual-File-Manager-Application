@@ -284,4 +284,3 @@ The **Educational File Manager** platform enables teachers to manage class mater
 This guide covers how to interact with the API for user registration, login, file upload, and assignment submission. With Postman, you can easily test these endpoints and verify the functionality of your platform. The MongoDB integration ensures that all user data, files, and submissions are securely stored and managed.
 
 Feel free to modify or extend the APIs based on your project’s needs! Let me know if you need any further clarification or modifications!
-```
