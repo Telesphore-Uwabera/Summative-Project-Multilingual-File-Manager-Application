@@ -1,4 +1,3 @@
-// models/File.js
 const mongoose = require("mongoose");
 
 const fileSchema = new mongoose.Schema(
@@ -8,8 +7,9 @@ const fileSchema = new mongoose.Schema(
     classId: { type: mongoose.Schema.Types.ObjectId, ref: "Class", required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     type: { type: String, enum: ["resource", "assignment"], required: true },
+    deadline: { type: Date, default: null }, // Deadline for assignments
   },
-  { timestamps: true } // Automatically adds createdAt and updatedAt fields
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("File", fileSchema);
