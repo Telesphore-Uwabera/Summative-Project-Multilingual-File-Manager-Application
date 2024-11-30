@@ -1,6 +1,3 @@
-Here is the complete **README.md** file for your project:
-
-```markdown
 # Multilingual File Manager Application
 
 ## Overview
