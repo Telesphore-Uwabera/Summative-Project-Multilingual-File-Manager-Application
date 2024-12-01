@@ -133,6 +133,8 @@ Below is a complete list of *Postman requests* you can use to test the applicati
     "password": "password123"
   }
   ```
+  **Login Request**
+   ![Login Screenshot](1.png)
 - *Response*: Returns JWT token for authentication.
 
 ---
