@@ -196,10 +196,11 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   - file: Upload a file.
   - name: Lecture Notes
   - classId: Math_Class_Id
-  - type: material
+  - type: material (assignment or resource)
   - deadline: 2024-12-31
 - *Response*: File uploaded confirmation.
-
+**File Upload Request (Teacher Only)**
+   ![File Upload Screenshot](6.png)
 ---
 
 ### 7. *Get Files for a Class*
