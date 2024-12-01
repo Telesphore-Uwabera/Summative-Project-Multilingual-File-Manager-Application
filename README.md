@@ -259,7 +259,7 @@ Switch language by updating preferredLanguage in profile and ensure all response
 
 ---
 
-*Tip*: Ensure your database and Redis server run before testing these endpoints.
+*MongoDB*: We used MongoDB to manage the database.
 
 ---
 
