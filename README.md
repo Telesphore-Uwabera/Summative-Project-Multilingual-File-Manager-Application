@@ -117,6 +117,8 @@ Below is a complete list of *Postman requests* you can use to test the applicati
     "role": "teacher"
   }
   ```
+  **User Registration Request**
+   ![User Registration Screenshot](1.png)
 - *Response*: User registration confirmation or error.
 
 ---
