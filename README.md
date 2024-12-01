@@ -273,7 +273,8 @@ Switch language by updating preferredLanguage in profile and ensure all response
 *MongoDB*: We used MongoDB to manage the database.
 
 ---
-
+**MongoDB Database**
+   ![MongoDB Database](7.png)
 ## **Testing Framework**
 We use **Jest** for unit testing to ensure the application’s functionality is properly validated. Tests cover areas such as user authentication, file uploads, submission creation, and class management.
 
