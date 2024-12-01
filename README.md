@@ -144,6 +144,8 @@ Below is a complete list of *Postman requests* you can use to test the applicati
 - *URL*: http://localhost:5000/api/auth/profile
 - *Headers*:
   - Authorization: Bearer <JWT_TOKEN>
+  **Get Profile Request**
+   ![Get Profile Screenshot](3.png)
 - *Response*: User profile data.
 
 ---
