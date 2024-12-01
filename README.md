@@ -134,7 +134,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   }
   ```
   **Login Request**
-   ![Login Screenshot](1.png)
+   ![Login Screenshot](2.png)
 - *Response*: Returns JWT token for authentication.
 
 ---
@@ -180,6 +180,8 @@ Below is a complete list of *Postman requests* you can use to test the applicati
     "name": "Math Class"
   }
   ```
+  **Class Creation Request**
+   ![Class Creation Screenshot](5.png)
 - *Response*: Confirmation of class creation.
 
 ---
