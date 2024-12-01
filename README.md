@@ -162,6 +162,8 @@ Below is a complete list of *Postman requests* you can use to test the applicati
     "preferredLanguage": "fr"
   }
   ```
+  **Get Profile Request**
+   ![Get Profile Screenshot](4.png)
 - *Response*: Updated user profile confirmation.
 
 ---
