@@ -1,6 +1,6 @@
 const express = require('express');
-const authMiddleware = require('../middleware/authMiddleware');  // Import the authMiddleware
-const User = require('../models/User');  // Import the User model for database interaction
+const authMiddleware = require('../middleware/authMiddleware');  
+const User = require('../models/User');  
 const router = express.Router();
 
 // @route GET /profile
@@ -8,7 +8,7 @@ const router = express.Router();
 // @access Private (auth required)
 router.get('/profile', authMiddleware, (req, res) => {
   try {
-    // Return the user's profile (excluding sensitive data like password)
+    // Returning the user's profile (excluding sensitive data like password)
     const { password, ...userProfile } = req.user.toObject();
     res.json(userProfile);
   } catch (err) {
@@ -18,14 +18,12 @@ router.get('/profile', authMiddleware, (req, res) => {
 });
 
 // @route PUT /profile
-// @desc Update the profile of the logged-in user (e.g., name, email, preferred language)
+// @desc Update the profile of the logged-in user 
 // @access Private (auth required)
 router.put('/profile', authMiddleware, async (req, res) => {
   try {
-    // Extract the fields to be updated from the request body
     const { name, email, language } = req.body;
-
-    // Ensure that the user is passing at least one field to update
+    
     if (!name && !email && !language) {
       return res.status(400).json({ msg: 'Please provide at least one field to update' });
     }
@@ -37,12 +35,12 @@ router.put('/profile', authMiddleware, async (req, res) => {
       return res.status(404).json({ msg: 'User not found' });
     }
 
-    // Update the user fields
+    // Updating the user fields
     if (name) user.name = name;
     if (email) user.email = email;
     if (language) user.language = language;
 
-    // Save the updated user object
+    // Saving the updated user object
     await user.save();
 
     // Send the updated user profile as response
