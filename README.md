@@ -284,8 +284,8 @@ We use **Jest** for unit testing to ensure the application’s functionality is 
 
 ---
 ### *Authors*
--Telesphore Uwabera
 
+-Telesphore Uwabera
 -Marie Joselyne Nyampinga
 ---
 Thank You So Much! 
