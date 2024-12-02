@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const Class = require("../models/Class"); // Adjust the path as needed
-const User = require("../models/User"); // Adjust the path as needed
+const Class = require("../models/Class"); 
+const User = require("../models/User"); 
 
 describe("Class Model Unit Tests", () => {
   let teacher, student;
@@ -18,7 +18,7 @@ describe("Class Model Unit Tests", () => {
   });
 
   beforeEach(async () => {
-    // Create a teacher and a student with required fields
+    // Creating a teacher and a student with required fields
     teacher = await User.create({
       name: "Teacher Name",
       email: "teacher@example.com",
