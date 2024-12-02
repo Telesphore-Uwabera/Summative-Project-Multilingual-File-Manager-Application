@@ -279,8 +279,13 @@ Switch language by updating preferredLanguage in profile and ensure all response
 ## **Testing Framework**
 We use **Jest** for unit testing to ensure the application’s functionality is properly validated. Tests cover areas such as user authentication, file uploads, submission creation, and class management.
 
+**Unittesting using Jest**
 ![Unittesting using Jest](uploads/8.png)
 
+---
+### *Authors*
+-Telesphore Uwabera
 
+-Marie Joselyne Nyampinga
 ---
 Thank You So Much! 
