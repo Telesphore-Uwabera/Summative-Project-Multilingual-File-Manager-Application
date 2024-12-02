@@ -3,9 +3,8 @@
 const express = require('express');
 const router = express.Router();
 
-// Example route for multilingual support
 router.get('/example', (req, res) => {
-  res.json({ message: req.t('welcome') }); // The 'welcome' key will be translated based on the user's language
+  res.json({ message: req.t('welcome') }); 
 });
 
 module.exports = router;
