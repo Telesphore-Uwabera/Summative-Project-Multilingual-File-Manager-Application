@@ -1,13 +1,12 @@
 const mongoose = require('mongoose');
-const File = require('../models/File'); // Adjust path as needed
+const File = require('../models/File'); 
 
 describe("File Model Unit Tests", () => {
-  // Set an increased timeout for the test suite
   jest.setTimeout(15000);
 
   beforeAll(async () => {
     try {
-      // Connect to the test database
+      // Connecting to the test database
       await mongoose.connect('mongodb://localhost:27017/testDB', {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -18,12 +17,12 @@ describe("File Model Unit Tests", () => {
   });
 
   afterEach(async () => {
-    // Clear database after each test
+    // Clearing database after each test
     await mongoose.connection.dropDatabase();
   });
 
   afterAll(async () => {
-    // Drop the database and close the connection after all tests
+    // Dropping the database and closing the connection after all tests
     await mongoose.connection.close();
   });
 
@@ -35,7 +34,7 @@ describe("File Model Unit Tests", () => {
       userId: new mongoose.Types.ObjectId(),
       type: "assignment",
       deadline: new Date("2024-12-31"),
-      fileBits: Buffer.from('file contents'), // Mock the file content
+      fileBits: Buffer.from('file contents'), 
       fileName: "assignment1.pdf",
     };
 
@@ -67,7 +66,7 @@ describe("File Model Unit Tests", () => {
       path: "/files/assignment2.pdf",
       classId: new mongoose.Types.ObjectId(),
       userId: new mongoose.Types.ObjectId(),
-      type: "invalidType", // Invalid type
+      type: "invalidType", 
     };
 
     const file = new File(fileData);
