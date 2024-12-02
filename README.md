@@ -279,7 +279,7 @@ Switch language by updating preferredLanguage in profile and ensure all response
 ## **Testing Framework**
 We use **Jest** for unit testing to ensure the application’s functionality is properly validated. Tests cover areas such as user authentication, file uploads, submission creation, and class management.
 
-![Testing files using Jest](uploads/Screenshot(408).png)
+![Testing files using Jest](uploads/Screenshot(480).png)
 
 ---
 Thank You So Much! 
