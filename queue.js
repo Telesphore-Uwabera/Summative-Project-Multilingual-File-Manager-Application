@@ -1,7 +1,7 @@
 const Bull = require('bull');
 const redis = require('redis');
 
-// Create a queue for file uploads
+// Creating a queue for file uploads
 const uploadQueue = new Bull('file-upload', {
   redis: {
     host: 'localhost',  // Redis host
@@ -9,7 +9,7 @@ const uploadQueue = new Bull('file-upload', {
   },
 });
 
-// Create a job for file uploads
+// Creating a job for file uploads
 uploadQueue.process(async (job, done) => {
   const { fileId, filePath } = job.data;
 
@@ -18,7 +18,6 @@ uploadQueue.process(async (job, done) => {
   try {
     // Here you can add file processing logic, like validating file format, moving it, etc.
     console.log(`Processing file: ${fileId}, located at: ${filePath}`);
-    // Simulate file processing logic here
     
     // Mark job as done
     done();
