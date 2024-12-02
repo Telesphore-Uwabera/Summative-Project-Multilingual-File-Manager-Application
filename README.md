@@ -118,7 +118,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   }
   ```
   **User Registration Request**
-   ![User Registration Screenshot](1.png)
+   ![User Registration Screenshot](uploads/1.png)
 - *Response*: User registration confirmation or error.
 
 ---
@@ -134,7 +134,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   }
   ```
   **Login Request**
-   ![Login Screenshot](2.png)
+   ![Login Screenshot](uploads/2.png)
 - *Response*: Returns JWT token for authentication.
 
 ---
@@ -145,7 +145,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
 - *Headers*:
   - Authorization: Bearer <JWT_TOKEN>
   **Get Profile Request**
-   ![Get Profile Screenshot](3.png)
+   ![Get Profile Screenshot](uploads/3.png)
 - *Response*: User profile data.
 
 ---
@@ -163,7 +163,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   }
   ```
   **Get Profile Request**
-   ![Get Profile Screenshot](4.png)
+   ![Get Profile Screenshot](uploads/4.png)
 - *Response*: Updated user profile confirmation.
 
 ---
@@ -181,7 +181,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   }
   ```
   **Class Creation Request**
-   ![Class Creation Screenshot](5.png)
+   ![Class Creation Screenshot](uploads/5.png)
 - *Response*: Confirmation of class creation.
 
 ---
@@ -274,12 +274,12 @@ Switch language by updating preferredLanguage in profile and ensure all response
 
 ---
 **MongoDB Database**
-   ![MongoDB Database](7.png)
+   ![MongoDB Database](uploads/7.png)
    
 ## **Testing Framework**
 We use **Jest** for unit testing to ensure the application’s functionality is properly validated. Tests cover areas such as user authentication, file uploads, submission creation, and class management.
 
-![Sample Image](uploads/Screenshot(480).png)
+![Unittesting using Jest](uploads/8.png)
 
 
 ---
