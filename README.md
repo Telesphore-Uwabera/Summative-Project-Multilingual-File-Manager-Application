@@ -200,7 +200,7 @@ Below is a complete list of *Postman requests* you can use to test the applicati
   - deadline: 2024-12-31
 - *Response*: File uploaded confirmation.
 **File Upload Request (Teacher Only)**
-   ![File Upload Screenshot](6.png)
+   ![File Upload Screenshot](uploads/6.png)
 ---
 
 ### 7. *Get Files for a Class*
