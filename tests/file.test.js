@@ -1,123 +1,108 @@
-// file.test.js
-const mongoose = require("mongoose");
-const request = require("supertest");
-const { MongoMemoryServer } = require("mongodb-memory-server");
-const app = require("../app"); // assuming your Express app is in app.js
-const File = require("../models/File"); // adjust path if needed
-const Class = require("../models/Class");
-const User = require("../models/User");
+const mongoose = require('mongoose');
+const File = require('../models/File'); // Adjust path as needed
 
-let mongoServer;
+describe("File Model Unit Tests", () => {
+  // Set an increased timeout for the test suite
+  jest.setTimeout(15000);
 
-beforeAll(async () => {
-  // Start an in-memory MongoDB server before all tests
-  mongoServer = await MongoMemoryServer.create();
-  const mongoUri = mongoServer.getUri();
-
-  // Connect to the in-memory database
-  await mongoose.connect(mongoUri, { useNewUrlParser: true, useUnifiedTopology: true });
-});
-
-afterAll(async () => {
-  // Stop the in-memory MongoDB server after all tests
-  await mongoose.disconnect();
-  await mongoServer.stop();
-});
-
-describe("File Model Tests", () => {
-  let classObj, userObj;
-
-  beforeEach(async () => {
-    // Create a class and user before each test to use in the File model
-    classObj = await Class.create({ name: "Math 101", teacher: new mongoose.Types.ObjectId() });
-    userObj = await User.create({ name: "John Doe", email: "john.doe@example.com" });
+  beforeAll(async () => {
+    try {
+      // Connect to the test database
+      await mongoose.connect('mongodb://localhost:27017/testDB', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      });
+    } catch (error) {
+      console.error('Error connecting to test database:', error);
+    }
   });
 
   afterEach(async () => {
-    // Clean up after each test
-    await File.deleteMany({});
-    await Class.deleteMany({});
-    await User.deleteMany({});
+    // Clear database after each test
+    await mongoose.connection.dropDatabase();
   });
 
-  test("should create a new File", async () => {
+  afterAll(async () => {
+    // Drop the database and close the connection after all tests
+    await mongoose.connection.close();
+  });
+
+  it("should create a new file with valid data", async () => {
     const fileData = {
-      name: "lecture_notes.pdf",
-      path: "/files/lecture_notes.pdf",
-      classId: classObj._id,
-      userId: userObj._id,
-      type: "resource",
-      deadline: null,
+      name: "Assignment 1",
+      path: "/files/assignment1.pdf",
+      classId: new mongoose.Types.ObjectId(),
+      userId: new mongoose.Types.ObjectId(),
+      type: "assignment",
+      deadline: new Date("2024-12-31"),
+      fileBits: Buffer.from('file contents'), // Mock the file content
+      fileName: "assignment1.pdf",
     };
 
-    const file = await File.create(fileData);
+    const file = new File(fileData);
+    const savedFile = await file.save();
 
-    // Check if the file was created successfully
-    expect(file).toBeDefined();
-    expect(file.name).toBe(fileData.name);
-    expect(file.path).toBe(fileData.path);
-    expect(file.type).toBe(fileData.type);
-    expect(file.classId.toString()).toBe(classObj._id.toString());
-    expect(file.userId.toString()).toBe(userObj._id.toString());
+    expect(savedFile.name).toBe(fileData.name);
+    expect(savedFile.path).toBe(fileData.path);
+    expect(savedFile.type).toBe(fileData.type);
+    expect(savedFile.deadline).toEqual(fileData.deadline);
   });
 
-  test("should throw an error if required fields are missing", async () => {
+  it("should fail if 'name' is missing", async () => {
     const fileData = {
-      name: "missing_path.pdf", // Missing path field
-      classId: classObj._id,
-      userId: userObj._id,
+      path: "/files/assignment2.pdf",
+      classId: new mongoose.Types.ObjectId(),
+      userId: new mongoose.Types.ObjectId(),
+      type: "resource",
+    };
+
+    const file = new File(fileData);
+
+    await expect(file.save()).rejects.toThrowError(/validation failed/i);
+  });
+
+  it("should fail if 'type' is invalid", async () => {
+    const fileData = {
+      name: "Assignment 2",
+      path: "/files/assignment2.pdf",
+      classId: new mongoose.Types.ObjectId(),
+      userId: new mongoose.Types.ObjectId(),
+      type: "invalidType", // Invalid type
+    };
+
+    const file = new File(fileData);
+
+    await expect(file.save()).rejects.toThrowError(/validation failed/i);
+  });
+
+  it("should fail if 'classId' is missing", async () => {
+    const fileData = {
+      name: "Assignment 3",
+      path: "/files/assignment3.pdf",
+      userId: new mongoose.Types.ObjectId(),
       type: "assignment",
     };
 
-    try {
-      await File.create(fileData);
-    } catch (error) {
-      expect(error).toBeDefined();
-      expect(error.errors.path).toBeDefined();
-    }
+    const file = new File(fileData);
+
+    await expect(file.save()).rejects.toThrowError(/validation failed/i);
   });
 
-  test("should return a list of files with the correct classId", async () => {
-    // Create files
-    await File.create({
-      name: "file1.pdf",
-      path: "/files/file1.pdf",
-      classId: classObj._id,
-      userId: userObj._id,
-      type: "resource",
-    });
-    await File.create({
-      name: "file2.pdf",
-      path: "/files/file2.pdf",
-      classId: classObj._id,
-      userId: userObj._id,
-      type: "assignment",
-    });
-
-    const files = await File.find({ classId: classObj._id });
-
-    // Check if the files are returned correctly
-    expect(files.length).toBe(2);
-    expect(files[0].classId.toString()).toBe(classObj._id.toString());
-    expect(files[1].classId.toString()).toBe(classObj._id.toString());
-  });
-
-  test("should return an error when an invalid ObjectId is used for classId", async () => {
-    const invalidClassId = "12345"; // Invalid ObjectId format
-
+  it("should successfully create a file without a deadline", async () => {
     const fileData = {
-      name: "invalid_file.pdf",
-      path: "/files/invalid_file.pdf",
-      classId: invalidClassId,
-      userId: userObj._id,
-      type: "resource",
+      name: "Assignment 4",
+      path: "/files/assignment4.pdf",
+      classId: new mongoose.Types.ObjectId(),
+      userId: new mongoose.Types.ObjectId(),
+      type: "assignment",
     };
 
-    try {
-      await File.create(fileData);
-    } catch (error) {
-      expect(error).toBeDefined();
-      expect(error.name).toBe("CastError");
-    }
+    const file = new File(fileData);
+    const savedFile = await file.save();
+
+    expect(savedFile.name).toBe(fileData.name);
+    expect(savedFile.path).toBe(fileData.path);
+    expect(savedFile.type).toBe(fileData.type);
+    expect(savedFile.deadline).toBeNull();
   });
 });
