@@ -5,7 +5,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 const File = require('../models/File');
 const Submission = require('../models/Submissions');
 const Class = require('../models/Class');
-const uploadQueue = require('../queue');  // Import the queue
+const uploadQueue = require('../queue');  
 const router = express.Router();
 
 // Middleware to check if user is a teacher
@@ -16,23 +16,23 @@ const isTeacher = (req, res, next) => {
   next();
 };
 
-// Set up file storage configuration for Multer
+// Setting up file storage configuration for Multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const classId = req.body.classId || 'general';
     const dir = `./uploads/${classId}`;
-    fs.mkdirSync(dir, { recursive: true }); // Create class directory if it doesn't exist
-    cb(null, dir); // Save file in the class directory
+    fs.mkdirSync(dir, { recursive: true }); 
+    cb(null, dir); 
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Unique file name
+    cb(null, Date.now() + '-' + file.originalname); 
   },
 });
 const upload = multer({ storage });
 
 // ------------------- Teacher Functionality ------------------- //
 
-// 1. Create a new class directory (also creates a class in DB)
+// 1. Creating a new class directory (also creates a class in DB)
 router.post('/class', authMiddleware, isTeacher, async (req, res) => {
   const { name } = req.body;
 
@@ -46,7 +46,7 @@ router.post('/class', authMiddleware, isTeacher, async (req, res) => {
       teacher: req.user._id, // The teacher creating the class
     });
 
-    // Create the directory on the server to store class materials
+    // Creating the directory on the server to store class materials
     const dir = `./uploads/${newClass._id}`;
     fs.mkdirSync(dir, { recursive: true });
 
@@ -71,14 +71,14 @@ router.post('/upload', authMiddleware, isTeacher, upload.single('file'), async (
       name,
       classId,
       type,
-      userId: req.user._id, // Linking the file with the teacher
-      path: req.file.path,  // Storing the file path
+      userId: req.user._id, 
+      path: req.file.path,  
       deadline: deadline ? new Date(deadline) : null, // Assign deadline if provided
     });
 
     await newFile.save();
 
-    // Add the file upload to the queue for background processing (e.g., validation)
+    // Add the file upload to the queue for background processing
     uploadQueue.add({
       fileId: newFile._id,
       filePath: newFile.path
@@ -145,7 +145,7 @@ router.get('/materials/:classId', authMiddleware, async (req, res) => {
   const classId = req.params.classId;
 
   try {
-    const userClasses = req.user.classes || []; // assuming classes field in User schema
+    const userClasses = req.user.classes || []; 
     if (!userClasses.includes(classId)) {
       return res.status(403).json({ msg: 'Access denied: You are not enrolled in this class' });
     }
@@ -190,7 +190,7 @@ router.post('/submit/:classId', authMiddleware, upload.single('assignment'), asy
 
     await newSubmission.save();
 
-    // Enqueue submission processing (validation, etc.)
+    // Enqueue submission processing 
     uploadQueue.add({
       fileId: newSubmission._id,
       filePath: newSubmission.file
@@ -208,13 +208,13 @@ router.get('/submissions/student/:classId', authMiddleware, async (req, res) => 
   const classId = req.params.classId;
 
   try {
-    const userClasses = req.user.classes || []; // assuming classes field in User schema
+    const userClasses = req.user.classes || []; 
     if (!userClasses.includes(classId)) {
       return res.status(403).json({ msg: 'Access denied: You are not enrolled in this class' });
     }
 
     const submissions = await Submission.find({ classId, student: req.user._id })
-      .populate('assignment', 'name') // Populate the assignment file name
+      .populate('assignment', 'name') 
       .populate('student', 'name email');
 
     res.status(200).json({ submissions });
@@ -243,7 +243,7 @@ router.put('/grade/:submissionId', authMiddleware, isTeacher, async (req, res) =
       return res.status(403).json({ msg: 'You are not authorized to grade this submission' });
     }
 
-    // Update grading fields
+    // Updating grading fields
     submission.grade = grade;
     submission.feedback = feedback || '';
 
