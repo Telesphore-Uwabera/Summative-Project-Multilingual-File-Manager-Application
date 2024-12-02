@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const User = require("../models/User"); // Adjust the path to the User model
+const User = require("../models/User"); 
 
 describe("User Model Unit Tests", () => {
   beforeAll(async () => {
@@ -32,7 +32,7 @@ describe("User Model Unit Tests", () => {
     expect(user.name).toBe("John Doe");
     expect(user.email).toBe("johndoe@example.com");
     expect(user.role).toBe("teacher");
-    expect(user.preferredLanguage).toBe("en"); // Default value
+    expect(user.preferredLanguage).toBe("en"); 
   });
 
   it("should throw an error if `name` is missing", async () => {
@@ -113,6 +113,6 @@ describe("User Model Unit Tests", () => {
 
     const user = await User.create(userData);
 
-    expect(user.preferredLanguage).toBe("en"); // Default value
+    expect(user.preferredLanguage).toBe("en"); 
   });
 });
